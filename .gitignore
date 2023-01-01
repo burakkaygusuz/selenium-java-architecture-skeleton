@@ -1,0 +1,18 @@
+#Intellj Idea
+.idea
+bin
+target
+
+# VSCode
+.vscode
+.settings
+.classpath
+.project
+.factorypath
+
+#Project
+logs
+.log
+
+#macOS
+.DS_Store
