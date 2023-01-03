@@ -1,8 +1,10 @@
 package io.github.burakkaygusuz.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 public class FormAuthenticationTest extends TestBase {
@@ -15,6 +17,7 @@ public class FormAuthenticationTest extends TestBase {
         final By usernameInputLocator = By.id("username");
         final By passwordInputLocator = By.id("password");
         final By loginButtonLocator = By.cssSelector("button[type='submit']");
+        final By securePageMessageLocator = By.id("flash");
 
         commandService.click(loginPageLinkTextLocator);
         commandService.sendKeys(usernameInputLocator, "tomsmith");
@@ -26,11 +29,7 @@ public class FormAuthenticationTest extends TestBase {
         });
 
         commandService.submit(loginButtonLocator);
-
-        final By securePageMessageLocator = By.id("flash");
-        assertSoftly(soft -> {
-            soft.assertThat(driver.getCurrentUrl()).contains("/secure");
-            soft.assertThat(commandService.getText(securePageMessageLocator).trim()).contains("You logged into a secure area!");
-        });
+        wait.until(ExpectedConditions.urlContains("/secure"));
+        assertThat(commandService.getText(securePageMessageLocator).trim()).contains("You logged into a secure area!");
     }
 }
