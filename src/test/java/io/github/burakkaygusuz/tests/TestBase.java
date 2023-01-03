@@ -18,15 +18,17 @@ import java.time.Duration;
 public class TestBase {
     protected Configuration config = ConfigurationUtil.getInstance().getConfiguration();
     protected WebDriver driver;
+    protected WebDriverWait wait;
     protected CommandServiceImpl commandService;
 
     @BeforeMethod
     @Parameters(value = "browser")
     public void setUp(String browser) {
         driver = new WebDriverBuilder(browser).build();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        commandService = new CommandServiceImpl(driver, new WebDriverWait(driver, Duration.ofSeconds(10)));
+        commandService = new CommandServiceImpl(driver, wait);
     }
 
     @AfterMethod
