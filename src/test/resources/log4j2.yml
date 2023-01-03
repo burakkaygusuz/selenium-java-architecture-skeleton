@@ -10,7 +10,7 @@ Configuration:
 
     RollingFile:
       - name: LogToRollingFile
-        fileName: logs/selenium_java_architecture_arch.log
+        fileName: logs/selenium_java_architecture.log
         filePattern: "logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz"
         PatternLayout:
           pattern: "[%-5level] %d{yyyy-MM-dd | HH:mm:ss} | %c{1} | %msg%n"
