@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class WebDriverBuilder {
 
-    private final ThreadLocal<RemoteWebDriver> driverThreadLocal = new ThreadLocal<>();
+    private static final ThreadLocal<RemoteWebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
     private final String browser;
     private URL url;
 
@@ -28,7 +28,7 @@ public class WebDriverBuilder {
 
     public WebDriver build() {
         final AbstractDriverOptions<?> options = Browser.valueOf(browser.toUpperCase()).getOptions();
-        driverThreadLocal.set(url != null ? new RemoteWebDriver(url, options, false) : new RemoteWebDriver(options, false));
-        return new EventFiringDecorator<>(new CustomWebDriverListener()).decorate(driverThreadLocal.get());
+        DRIVER_THREAD_LOCAL.set(url != null ? new RemoteWebDriver(url, options, false) : new RemoteWebDriver(options, false));
+        return new EventFiringDecorator<>(new CustomWebDriverListener()).decorate(DRIVER_THREAD_LOCAL.get());
     }
 }
