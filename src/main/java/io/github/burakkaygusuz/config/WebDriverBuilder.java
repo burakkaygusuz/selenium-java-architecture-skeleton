@@ -34,7 +34,8 @@ public class WebDriverBuilder {
 
     public WebDriver build() {
         final AbstractDriverOptions<?> options = Browser.valueOf(browser.toUpperCase()).getOptions();
-        return new EventFiringDecorator<>(new CustomWebDriverListener()).decorate(DRIVER_THREAD_LOCAL.get());
         DRIVER_THREAD_LOCAL.set(url != null ? new RemoteWebDriver(url, options, isTracingEnabled) : new RemoteWebDriver(options, isTracingEnabled));
+        WebDriver original = DRIVER_THREAD_LOCAL.get();
+        return new EventFiringDecorator<>(new CustomWebDriverListener()).decorate(original);
     }
 }
