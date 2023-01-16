@@ -15,6 +15,7 @@ public class WebDriverBuilder {
     private static final ThreadLocal<RemoteWebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
     private final String browser;
     private URL url;
+    private boolean isTracingEnabled = true;
 
     public WebDriverBuilder(String browser) {
         this.browser = browser;
@@ -26,9 +27,14 @@ public class WebDriverBuilder {
         return this;
     }
 
+    public WebDriverBuilder enableTracing(boolean isTracingEnabled) {
+        this.isTracingEnabled = isTracingEnabled;
+        return this;
+    }
+
     public WebDriver build() {
         final AbstractDriverOptions<?> options = Browser.valueOf(browser.toUpperCase()).getOptions();
-        DRIVER_THREAD_LOCAL.set(url != null ? new RemoteWebDriver(url, options, false) : new RemoteWebDriver(options, false));
         return new EventFiringDecorator<>(new CustomWebDriverListener()).decorate(DRIVER_THREAD_LOCAL.get());
+        DRIVER_THREAD_LOCAL.set(url != null ? new RemoteWebDriver(url, options, isTracingEnabled) : new RemoteWebDriver(options, isTracingEnabled));
     }
 }
