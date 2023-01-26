@@ -1,9 +1,7 @@
 package io.github.burakkaygusuz.config;
 
-import org.openqa.selenium.chrome.ChromeDriverLogLevel;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.AbstractDriverOptions;
@@ -24,7 +22,6 @@ public enum Browser {
             prefs.put("profile.password_manager_enabled", false);
 
             final ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setLogLevel(ChromeDriverLogLevel.SEVERE)
                     .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
                     .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
@@ -41,7 +38,6 @@ public enum Browser {
 
             firefoxProfile.setAcceptUntrustedCertificates(true);
             firefoxProfile.setAssumeUntrustedCertificateIssuer(true);
-            firefoxOptions.setLogLevel(FirefoxDriverLogLevel.WARN)
                     .addPreference("dom.webnotifications.enabled", false)
                     .addPreference("gfx.direct2d.disabled", true)
                     .addPreference("layers.acceleration.force-enabled", true)
