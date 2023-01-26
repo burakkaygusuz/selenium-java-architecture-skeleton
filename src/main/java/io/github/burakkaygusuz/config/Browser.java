@@ -22,11 +22,11 @@ public enum Browser {
             prefs.put("profile.password_manager_enabled", false);
 
             final ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions
                     .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
-                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
-                    .setAcceptInsecureCerts(true)
-                    .setHeadless(true);
+                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage", "--headless=new")
+                    .setAcceptInsecureCerts(true);
             return chromeOptions;
         }
     },
@@ -38,11 +38,11 @@ public enum Browser {
 
             firefoxProfile.setAcceptUntrustedCertificates(true);
             firefoxProfile.setAssumeUntrustedCertificateIssuer(true);
-                    .addPreference("dom.webnotifications.enabled", false)
+            firefoxOptions.addPreference("dom.webnotifications.enabled", false)
                     .addPreference("gfx.direct2d.disabled", true)
                     .addPreference("layers.acceleration.force-enabled", true)
                     .addPreference("javascript.enabled", true)
-                    .setHeadless(true)
+                    .addArguments("-headless")
                     .setProfile(firefoxProfile);
             return firefoxOptions;
         }
@@ -59,9 +59,8 @@ public enum Browser {
             final EdgeOptions edgeOptions = new EdgeOptions();
             edgeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
-                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
-                    .setAcceptInsecureCerts(true)
-                    .setHeadless(true);
+                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage", "--headless=new")
+                    .setAcceptInsecureCerts(true);
             return edgeOptions;
         }
     };
