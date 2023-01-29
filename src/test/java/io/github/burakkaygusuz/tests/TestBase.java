@@ -24,7 +24,11 @@ public class TestBase {
     @BeforeMethod
     @Parameters(value = "browser")
     public void setUp(String browser) {
-        driver = new WebDriverBuilder(browser).setUrl(config.getString("GRID_URL")).enableTracing(false).build();
+        driver = new WebDriverBuilder(browser)
+                .setUrl(config.getString("GRID_URL"))
+                .enableHeadless()
+                .enableTracing(false)
+                .build();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));

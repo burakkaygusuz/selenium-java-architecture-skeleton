@@ -25,7 +25,7 @@ public enum Browser {
             chromeOptions
                     .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
-                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage", "--headless=new")
+                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
                     .setAcceptInsecureCerts(true);
             return chromeOptions;
         }
@@ -42,7 +42,6 @@ public enum Browser {
                     .addPreference("gfx.direct2d.disabled", true)
                     .addPreference("layers.acceleration.force-enabled", true)
                     .addPreference("javascript.enabled", true)
-                    .addArguments("-headless")
                     .setProfile(firefoxProfile);
             return firefoxOptions;
         }
@@ -59,7 +58,7 @@ public enum Browser {
             final EdgeOptions edgeOptions = new EdgeOptions();
             edgeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
-                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage", "--headless=new")
+                    .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
                     .setAcceptInsecureCerts(true);
             return edgeOptions;
         }
