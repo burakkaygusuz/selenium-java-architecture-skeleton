@@ -5,6 +5,7 @@ import io.github.burakkaygusuz.config.WebDriverBuilder;
 import io.github.burakkaygusuz.listeners.CustomTestListener;
 import io.github.burakkaygusuz.utils.ConfigurationUtil;
 import org.apache.commons.configuration2.Configuration;
+import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +25,7 @@ public class TestBase {
     @BeforeMethod
     @Parameters(value = "browser")
     public void setUp(String browser) {
+        ThreadContext.put("browser", browser.toUpperCase());
         driver = new WebDriverBuilder(browser)
                 .setUrl(config.getString("GRID_URL"))
                 .enableHeadless()

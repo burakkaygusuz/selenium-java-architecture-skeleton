@@ -6,7 +6,7 @@ Configuration:
       name: LogToConsole
       PatternLayout:
         DisableAnsi: false
-        Pattern: "%style{%c{1} | %d{yyyy-MM-dd HH:mm:ss}}{blue} %highlight{[%-5level]}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} %msg%n"
+        Pattern: "%style{%c{1} | %d{yyyy-MM-dd HH:mm:ss}}{blue} %highlight{[%-5level]}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green} | %X{browser} | %msg%n"
 
     RollingFile:
       - name: LogToRollingFile

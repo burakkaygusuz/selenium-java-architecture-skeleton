@@ -2,6 +2,7 @@ package io.github.burakkaygusuz.config;
 
 import io.github.burakkaygusuz.listeners.CustomWebDriverListener;
 import lombok.SneakyThrows;
+import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -23,6 +24,7 @@ public class WebDriverBuilder {
 
     public WebDriverBuilder(String browser) {
         this.browser = browser;
+        ThreadContext.put("browser", browser.toUpperCase());
         this.options = Browser.valueOf(browser.toUpperCase()).getOptions();
     }
 
