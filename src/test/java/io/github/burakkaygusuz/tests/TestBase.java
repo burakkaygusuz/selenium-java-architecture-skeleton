@@ -24,7 +24,7 @@ public class TestBase {
 
     @BeforeMethod
     @Parameters(value = "browser")
-    public void setUp(String browser) {
+    public void setUp(String browser) throws MalformedURLException {
         ThreadContext.put("browser", browser.toUpperCase());
         driver = new WebDriverBuilder(browser)
                 .setUrl(config.getString("GRID_URL"))

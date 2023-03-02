@@ -22,7 +22,6 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <jackson.version>2.14.2</jackson.version>
         <log4j.version>2.20.0</log4j.version>
-        <lombok.version>1.18.26</lombok.version>
         <selenium.version>4.8.1</selenium.version>
         <testng.version>7.7.1</testng.version>
         <!--Plugin Versions-->
@@ -91,12 +90,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-configuration2</artifactId>
             <version>${commons-configuration2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>

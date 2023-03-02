@@ -1,7 +1,6 @@
 package io.github.burakkaygusuz.config;
 
 import io.github.burakkaygusuz.listeners.CustomWebDriverListener;
-import lombok.SneakyThrows;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -28,9 +27,9 @@ public class WebDriverBuilder {
         this.options = Browser.valueOf(browser.toUpperCase()).getOptions();
     }
 
-    @SneakyThrows(MalformedURLException.class)
     public WebDriverBuilder setUrl(String path) {
         url = new URL(path);
+    public WebDriverBuilder setUrl(String path) throws MalformedURLException {
         return this;
     }
 
