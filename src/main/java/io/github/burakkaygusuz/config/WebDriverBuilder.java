@@ -27,9 +27,8 @@ public class WebDriverBuilder {
         this.options = Browser.valueOf(browser.toUpperCase()).getOptions();
     }
 
-    public WebDriverBuilder setUrl(String path) {
-        url = new URL(path);
     public WebDriverBuilder setUrl(String path) throws MalformedURLException {
+        this.url = new URL(path);
         return this;
     }
 
