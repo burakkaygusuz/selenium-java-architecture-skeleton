@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
-public class CustomExpectedConditions {
+public class CustomConditions {
 
     /**
      * An expectation for checking if all selectable options are present.
