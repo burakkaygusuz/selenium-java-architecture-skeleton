@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class WebDriverBuilder {
 
-    private static final ThreadLocal<RemoteWebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
     private final String browser;
     private final AbstractDriverOptions<?> options;
     private URL url;
