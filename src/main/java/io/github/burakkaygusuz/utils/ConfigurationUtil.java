@@ -6,35 +6,54 @@ import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.configuration2.io.FileHandler;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.Logger;
+
+import java.io.File;
 
 public class ConfigurationUtil {
 
-    private static final Logger LOGGER = (Logger) LogManager.getLogger(ConfigurationUtil.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(ConfigurationUtil.class);
     private static ConfigurationUtil instance;
     private final FileBasedConfigurationBuilder<FileBasedConfiguration> builder;
+    private Configuration config;
 
-    public ConfigurationUtil(String fileName) {
+    private ConfigurationUtil(File configFile) {
         builder = new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
                 .configure(new Parameters().properties()
-                        .setFileName(fileName));
+                        .setFile(configFile));
     }
 
     public static synchronized ConfigurationUtil getInstance() {
         if (instance == null)
-            instance = new ConfigurationUtil("config.properties");
+            instance = new ConfigurationUtil(new File("config.properties"));
+        return instance;
+    }
+
+    public static synchronized ConfigurationUtil getInstance(String fileName) {
+        if (instance == null)
+            instance = new ConfigurationUtil(new File(fileName));
         return instance;
     }
 
     public Configuration getConfiguration() {
-        Configuration config;
         try {
             config = builder.getConfiguration();
         } catch (ConfigurationException e) {
-            LOGGER.error("Unable to find configuration file.");
+            LOGGER.error("Unable to find configuration file: %s".formatted(e.getMessage()), e);
             throw new RuntimeException(e);
         }
         return config;
+    }
+
+    public void saveConfiguration() {
+        try {
+            FileHandler handler = new FileHandler((PropertiesConfiguration) config);
+            handler.save();
+        } catch (ConfigurationException e) {
+            LOGGER.error("Unable to save configuration file: %s".formatted(e.getMessage()), e);
+            throw new RuntimeException(e);
+        }
     }
 }
