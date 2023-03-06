@@ -1,13 +1,13 @@
 package io.github.burakkaygusuz.listeners;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.Logger;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 public class CustomTestListener implements ITestListener {
 
-    private static final Logger LOGGER = (Logger) LogManager.getLogger(CustomTestListener.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(CustomTestListener.class);
 
     @Override
     public void onTestStart(ITestResult result) {

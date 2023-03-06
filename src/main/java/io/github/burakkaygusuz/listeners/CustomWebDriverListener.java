@@ -1,7 +1,7 @@
 package io.github.burakkaygusuz.listeners;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.events.WebDriverListener;
 
 public class CustomWebDriverListener implements WebDriverListener {
 
-    private static final Logger LOGGER = (Logger) LogManager.getLogger(CustomWebDriverListener.class.getName());
+    private static final Logger LOGGER = LogManager.getLogger(CustomWebDriverListener.class);
 
     @Override
     public void afterGet(WebDriver driver, String url) {
