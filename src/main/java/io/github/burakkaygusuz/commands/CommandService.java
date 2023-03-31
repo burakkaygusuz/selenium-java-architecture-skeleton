@@ -1,22 +1,20 @@
 package io.github.burakkaygusuz.commands;
 
-import org.openqa.selenium.By;
-
 public interface CommandService {
 
-    void click(By locator);
+    void click();
 
-    void submit(By locator);
+    void submit();
 
-    void clear(By locator);
+    void clear();
 
-    String getText(By locator);
+    String getText();
 
-    String getAttribute(By locator, String attribute);
+    String getAttribute(String attribute);
 
-    void sendKeys(By locator, CharSequence... keysToSend);
+    void sendKeys(CharSequence... keysToSend);
 
-    boolean isDisplayed(By locator);
+    boolean isDisplayed();
 
-    boolean isSelected(By locator);
+    boolean isSelected();
 }

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 public class FormAuthenticationTest extends TestBase {
@@ -19,17 +19,17 @@ public class FormAuthenticationTest extends TestBase {
         final By loginButtonLocator = By.cssSelector("button[type='submit']");
         final By securePageMessageLocator = By.id("flash");
 
-        commandService.click(loginPageLinkTextLocator);
-        commandService.sendKeys(usernameInputLocator, "tomsmith");
-        commandService.sendKeys(passwordInputLocator, "SuperSecretPassword!");
+        commandService.locator(loginPageLinkTextLocator).click();
+        commandService.locator(usernameInputLocator).sendKeys("tomsmith");
+        commandService.locator(passwordInputLocator).sendKeys("SuperSecretPassword!");
 
         assertSoftly(soft -> {
-            soft.assertThat(commandService.getAttribute(usernameInputLocator, "value")).isEqualTo("tomsmith");
-            soft.assertThat(commandService.getAttribute(passwordInputLocator, "value")).isEqualTo("SuperSecretPassword!");
+            soft.assertThat(commandService.locator(usernameInputLocator).getAttribute("value")).isEqualTo("tomsmith");
+            soft.assertThat(commandService.locator(passwordInputLocator).getAttribute("value")).isEqualTo("SuperSecretPassword!");
         });
 
-        commandService.submit(loginButtonLocator);
+        commandService.locator(loginButtonLocator).submit();
         wait.until(ExpectedConditions.urlContains("/secure"));
-        assertThat(commandService.getText(securePageMessageLocator).trim()).contains("You logged into a secure area!");
+        assertThat(commandService.locator(securePageMessageLocator).getText().trim()).contains("You logged into a secure area!");
     }
 }
