@@ -20,7 +20,7 @@
         <assertj-core.version>3.24.2</assertj-core.version>
         <commons-configuration2.version>2.9.0</commons-configuration2.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <jackson.version>2.14.2</jackson.version>
+        <jackson.version>2.15.0</jackson.version>
         <log4j.version>2.20.0</log4j.version>
         <selenium.version>4.9.0</selenium.version>
         <testng.version>7.7.1</testng.version>
