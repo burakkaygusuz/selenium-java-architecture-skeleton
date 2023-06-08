@@ -1,5 +1,6 @@
 package io.github.burakkaygusuz.config;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -26,6 +27,7 @@ public enum Browser {
                     .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
                     .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
+                    .setPageLoadStrategy(PageLoadStrategy.NORMAL)
                     .setAcceptInsecureCerts(true);
             return chromeOptions;
         }
@@ -42,6 +44,7 @@ public enum Browser {
                     .addPreference("gfx.direct2d.disabled", true)
                     .addPreference("layers.acceleration.force-enabled", true)
                     .addPreference("javascript.enabled", true)
+                    .setPageLoadStrategy(PageLoadStrategy.NORMAL)
                     .setProfile(firefoxProfile);
             return firefoxOptions;
         }
@@ -59,6 +62,7 @@ public enum Browser {
             edgeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
                     .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
+                    .setPageLoadStrategy(PageLoadStrategy.NORMAL)
                     .setAcceptInsecureCerts(true);
             return edgeOptions;
         }
