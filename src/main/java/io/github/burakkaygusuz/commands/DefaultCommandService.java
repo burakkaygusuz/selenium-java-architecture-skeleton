@@ -43,7 +43,8 @@ public class DefaultCommandService implements CommandService {
     @Override
     public String getText() {
         String expectedText = wait.until(driver -> presenceOfElementLocated(locator).apply(driver)).getText();
-        return wait.until(driver -> textToBePresentInElementLocated(locator, expectedText).apply(driver)) ? expectedText : null;
+        return wait.until(driver -> textToBePresentInElementLocated(locator, expectedText).apply(driver)) ? expectedText
+                : null;
     }
 
     @Override

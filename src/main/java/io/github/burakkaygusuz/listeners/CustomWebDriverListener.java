@@ -42,11 +42,13 @@ public class CustomWebDriverListener implements WebDriverListener {
 
     @Override
     public void beforeSendKeys(WebElement element, CharSequence... keysToSend) {
-        LOGGER.info("The value %s is writing to the %s element".formatted(Arrays.toString(keysToSend), element.getAttribute("name")));
+        LOGGER.info("The value %s is writing to the %s element".formatted(Arrays.toString(keysToSend),
+                element.getAttribute("name")));
     }
 
     @Override
     public void afterSendKeys(WebElement element, CharSequence... keysToSend) {
-        LOGGER.info("The value %s has been written to the %s element".formatted(Arrays.toString(keysToSend), element.getAttribute("name")));
+        LOGGER.info("The value %s has been written to the %s element".formatted(Arrays.toString(keysToSend),
+                element.getAttribute("name")));
     }
 }

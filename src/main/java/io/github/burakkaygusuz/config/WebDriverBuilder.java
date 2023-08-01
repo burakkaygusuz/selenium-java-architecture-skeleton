@@ -60,7 +60,8 @@ public class WebDriverBuilder {
     }
 
     public WebDriver build() {
-        DRIVER_THREAD_LOCAL.set(url != null ? new RemoteWebDriver(url, options, isTracingEnabled) : new RemoteWebDriver(options, isTracingEnabled));
+        DRIVER_THREAD_LOCAL.set(url != null ? new RemoteWebDriver(url, options, isTracingEnabled)
+                : new RemoteWebDriver(options, isTracingEnabled));
         WebDriver original = DRIVER_THREAD_LOCAL.get();
         return new EventFiringDecorator<>(new CustomWebDriverListener()).decorate(original);
     }
