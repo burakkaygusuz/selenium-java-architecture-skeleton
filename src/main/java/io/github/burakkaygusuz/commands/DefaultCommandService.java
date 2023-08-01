@@ -20,6 +20,9 @@ public class DefaultCommandService implements CommandService {
 
     public DefaultCommandService locator(By locator) {
         this.locator = locator;
+        if (locator == null) {
+            throw new IllegalArgumentException("Locator cannot be null");
+        }
         return this;
     }
 
