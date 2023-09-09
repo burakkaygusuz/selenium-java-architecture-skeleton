@@ -1,5 +1,6 @@
 package io.github.burakkaygusuz.config;
 
+import io.github.burakkaygusuz.exceptions.UnsupportedBrowserException;
 import io.github.burakkaygusuz.listeners.CustomWebDriverListener;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
@@ -54,7 +55,7 @@ public class WebDriverBuilder {
                 edgeOptions.addArguments("headless=new");
                 options.merge(edgeOptions);
             }
-            default -> throw new IllegalStateException("Unsupported browser: %s".formatted(browser));
+            default -> throw new UnsupportedBrowserException("Browser does not exist: %s".formatted(browser));
         }
         return this;
     }
