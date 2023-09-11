@@ -12,6 +12,7 @@ public class FormAuthenticationTest extends TestBase {
     @Test(testName = "Login Test")
     void loginTest() {
         driver.get(config.getString("BASE_URL"));
+        assertThat(driver.getTitle()).isEqualTo("The Internet");
 
         final By loginPageLinkTextLocator = By.linkText("Form Authentication");
         final By usernameInputLocator = By.id("username");
@@ -19,17 +20,18 @@ public class FormAuthenticationTest extends TestBase {
         final By loginButtonLocator = By.cssSelector("button[type='submit']");
         final By securePageMessageLocator = By.id("flash");
 
-        commandService.locator(loginPageLinkTextLocator).click();
-        commandService.locator(usernameInputLocator).sendKeys("tomsmith");
-        commandService.locator(passwordInputLocator).sendKeys("SuperSecretPassword!");
+        webElementService.findButton(loginPageLinkTextLocator).click();
+        assertThat(webElementService.findElement(By.tagName("h2")).getText()).isEqualTo("Login Page");
+        webElementService.findInput(usernameInputLocator).sendKeys("tomsmith");
+        webElementService.findInput(passwordInputLocator).sendKeys("SuperSecretPassword!");
 
         assertSoftly(soft -> {
-            soft.assertThat(commandService.locator(usernameInputLocator).getAttribute("value")).isEqualTo("tomsmith");
-            soft.assertThat(commandService.locator(passwordInputLocator).getAttribute("value")).isEqualTo("SuperSecretPassword!");
+            soft.assertThat(webElementService.findAttribute(usernameInputLocator, "value")).isEqualTo("tomsmith");
+            soft.assertThat(webElementService.findAttribute(passwordInputLocator, "value")).isEqualTo("SuperSecretPassword!");
         });
 
-        commandService.locator(loginButtonLocator).submit();
+        webElementService.findButton(loginButtonLocator).submit();
         wait.until(ExpectedConditions.urlContains("/secure"));
-        assertThat(commandService.locator(securePageMessageLocator).getText().trim()).contains("You logged into a secure area!");
+        assertThat(webElementService.findElement(securePageMessageLocator).getText().trim()).contains("You logged into a secure area!");
     }
 }

@@ -1,9 +1,9 @@
 package io.github.burakkaygusuz.tests;
 
-import io.github.burakkaygusuz.commands.DefaultCommandService;
 import io.github.burakkaygusuz.config.WebDriverBuilder;
 import io.github.burakkaygusuz.listeners.CustomTestListener;
 import io.github.burakkaygusuz.utils.ConfigurationUtil;
+import io.github.burakkaygusuz.webElements.WebElementService;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
@@ -21,7 +21,7 @@ public class TestBase {
     protected Configuration config = ConfigurationUtil.getInstance().getConfiguration();
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected DefaultCommandService commandService;
+    protected WebElementService webElementService;
 
     @BeforeMethod
     @Parameters(value = "browser")
@@ -32,17 +32,15 @@ public class TestBase {
                 .enableHeadless()
                 .enableTracing(false)
                 .build();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        commandService = new DefaultCommandService(driver, wait);
+
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        webElementService = new WebElementService(wait);
     }
 
     @AfterMethod
     public synchronized void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-        driver = null;
+        if (driver != null) driver.quit();
     }
 }
