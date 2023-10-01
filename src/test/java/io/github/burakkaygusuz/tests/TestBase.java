@@ -16,7 +16,7 @@ import org.testng.annotations.Parameters;
 import java.net.MalformedURLException;
 import java.time.Duration;
 
-@Listeners({CustomTestListener.class})
+@Listeners({ CustomTestListener.class })
 public class TestBase {
     protected Configuration config = ConfigurationUtil.getInstance().getConfiguration();
     protected WebDriver driver;
@@ -41,6 +41,7 @@ public class TestBase {
 
     @AfterMethod
     public synchronized void tearDown() {
-        if (driver != null) driver.quit();
+        if (driver != null)
+            driver.quit();
     }
 }

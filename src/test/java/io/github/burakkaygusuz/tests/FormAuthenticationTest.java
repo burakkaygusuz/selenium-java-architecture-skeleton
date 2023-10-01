@@ -27,11 +27,13 @@ public class FormAuthenticationTest extends TestBase {
 
         assertSoftly(soft -> {
             soft.assertThat(webElementService.findAttribute(usernameInputLocator, "value")).isEqualTo("tomsmith");
-            soft.assertThat(webElementService.findAttribute(passwordInputLocator, "value")).isEqualTo("SuperSecretPassword!");
+            soft.assertThat(webElementService.findAttribute(passwordInputLocator, "value"))
+                    .isEqualTo("SuperSecretPassword!");
         });
 
         webElementService.findButton(loginButtonLocator).submit();
         wait.until(ExpectedConditions.urlContains("/secure"));
-        assertThat(webElementService.findElement(securePageMessageLocator).getText().trim()).contains("You logged into a secure area!");
+        assertThat(webElementService.findElement(securePageMessageLocator).getText().trim())
+                .contains("You logged into a secure area!");
     }
 }
