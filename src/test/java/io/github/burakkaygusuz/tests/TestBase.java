@@ -14,6 +14,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.time.Duration;
 
 @Listeners({ CustomTestListener.class })
@@ -25,7 +26,7 @@ public class TestBase {
 
     @BeforeMethod
     @Parameters(value = "browser")
-    public void setUp(String browser) throws MalformedURLException {
+    public void setUp(String browser) throws MalformedURLException, URISyntaxException {
         ThreadContext.put("browser", browser.toUpperCase());
         driver = new WebDriverBuilder(browser)
                 .setUrl(config.getString("GRID_URL"))

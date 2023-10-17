@@ -12,6 +12,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 public class WebDriverBuilder {
@@ -28,8 +30,8 @@ public class WebDriverBuilder {
         this.options = Browser.valueOf(browser.toUpperCase()).getOptions();
     }
 
-    public WebDriverBuilder setUrl(String path) throws MalformedURLException {
-        this.url = new URL(path);
+    public WebDriverBuilder setUrl(String path) throws URISyntaxException, MalformedURLException {
+        this.url = new URI(path).toURL();
         return this;
     }
 
