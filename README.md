@@ -12,3 +12,28 @@ development machine:
 | Windows | `scoop install java/openjdk21` | `scoop install maven` | `winget install -e --id Docker.DockerDesktop` |
 | macOS   | `brew install --cask temurin`  | `brew install maven`  | `brew install docker`                         |
 
+## Executing The Tests
+
+- Clone the repository.
+
+```shell
+git clone git@github.com:burakkaygusuz/selenium-java-architecture-skeleton.git
+```
+
+- Change the directory.
+
+```shell
+cd selenium-java-architecture-skeleton
+```
+
+- Execute the .yml file to start the Selenium Grid.
+
+```shell
+docker-compose -f docker-compose.yml up
+```
+
+- Run the test.
+
+```shell
+mvn clean test
+```
