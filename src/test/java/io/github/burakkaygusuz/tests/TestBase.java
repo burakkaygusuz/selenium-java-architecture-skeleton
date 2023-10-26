@@ -2,9 +2,8 @@ package io.github.burakkaygusuz.tests;
 
 import io.github.burakkaygusuz.config.WebDriverBuilder;
 import io.github.burakkaygusuz.listeners.CustomTestListener;
-import io.github.burakkaygusuz.utils.ConfigurationUtil;
+import io.github.burakkaygusuz.utils.PropertyUtil;
 import io.github.burakkaygusuz.webElements.WebElementService;
-import org.apache.commons.configuration2.Configuration;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -19,7 +18,8 @@ import java.time.Duration;
 
 @Listeners({ CustomTestListener.class })
 public class TestBase {
-    protected Configuration config = ConfigurationUtil.getInstance().getConfiguration();
+
+    protected PropertyUtil props = PropertyUtil.getInstance("config.properties");
     protected WebDriver driver;
     protected WebDriverWait wait;
     protected WebElementService webElementService;
@@ -29,7 +29,7 @@ public class TestBase {
     public void setUp(String browser) throws MalformedURLException, URISyntaxException {
         ThreadContext.put("browser", browser.toUpperCase());
         driver = new WebDriverBuilder(browser)
-                .setUrl(config.getString("GRID_URL"))
+                .setUrl(props.getProperty("GRID_URL"))
                 .enableHeadless()
                 .enableTracing(false)
                 .build();

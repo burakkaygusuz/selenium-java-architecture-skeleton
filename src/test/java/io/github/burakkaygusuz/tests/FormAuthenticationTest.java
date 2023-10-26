@@ -11,7 +11,7 @@ public class FormAuthenticationTest extends TestBase {
 
     @Test(testName = "Login Test")
     void loginTest() {
-        driver.get(config.getString("BASE_URL"));
+        driver.get(props.getProperty("BASE_URL"));
         assertThat(driver.getTitle()).isEqualTo("The Internet");
 
         final By loginPageLinkTextLocator = By.linkText("Form Authentication");
