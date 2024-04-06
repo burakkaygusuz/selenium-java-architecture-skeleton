@@ -20,10 +20,7 @@ public class CustomConditions {
                 String inputType = element.getAttribute("type");
                 String inputName = element.getAttribute("name");
                 try {
-                    if (inputType.contains("text") ||
-                            inputType.contains("mail") ||
-                            inputType.contains("password") ||
-                            inputType.contains("number") ||
+                    if (inputType.matches("text|mail|password|number") ||
                             inputName.contains("message")) {
                         return element;
                     }
