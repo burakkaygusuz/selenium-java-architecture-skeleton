@@ -23,7 +23,7 @@
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <jackson.version>2.17.1</jackson.version>
         <log4j.version>2.23.1</log4j.version>
-        <selenium.version>4.21.0</selenium.version>
+        <selenium.version>4.22.0</selenium.version>
         <testng.version>7.10.2</testng.version>
         <!--Plugin
         Versions-->
