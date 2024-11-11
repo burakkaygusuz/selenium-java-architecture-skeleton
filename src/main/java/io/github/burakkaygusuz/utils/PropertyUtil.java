@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicReference;
 
+import io.github.burakkaygusuz.exceptions.PropertyUtilException;
+
 public class PropertyUtil {
 
     private static final AtomicReference<PropertyUtil> instance = new AtomicReference<>(null);
@@ -15,7 +17,7 @@ public class PropertyUtil {
         try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(fileName)) {
             properties.load(inputStream);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new PropertyUtilException("Error loading properties file: " + fileName);
         }
     }
 
