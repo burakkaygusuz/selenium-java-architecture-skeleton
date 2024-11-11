@@ -1,6 +1,6 @@
 # Selenium Java Architecture Skeleton
 
-A lean automation architecture built for e2e testing of web applications, developed with Java 21 and Selenium 4.
+A lean automation architecture built for e2e testing of web applications, developed with Java and Selenium 4.
 
 ## Prerequisites
 
@@ -9,8 +9,8 @@ development machine:
 
 | OS      | JDK                            | Maven                 | Docker                                        |
 |---------|--------------------------------|-----------------------|-----------------------------------------------|
-| Windows | `scoop install java/openjdk21` | `scoop install maven` | `winget install -e --id Docker.DockerDesktop` |
-| macOS   | `brew install --cask temurin`  | `brew install maven`  | `brew install docker`                         |
+| Windows | `scoop install java/openjdk`   | `scoop install maven` | `winget install -e --id Docker.DockerDesktop` |
+| macOS   | `brew install openjdk`         | `brew install maven`  | `brew install docker`                         |
 
 ## Executing The Tests
 
