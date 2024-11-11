@@ -3,10 +3,11 @@ package io.github.burakkaygusuz.utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PropertyUtil {
 
-    private static volatile PropertyUtil instance = null;
+    private static final AtomicReference<PropertyUtil> instance = new AtomicReference<>(null);
     private final Properties properties;
 
     private PropertyUtil(String fileName) {
@@ -19,13 +20,10 @@ public class PropertyUtil {
     }
 
     public static PropertyUtil getInstance(String fileName) {
-        if (instance == null) {
-            synchronized (PropertyUtil.class) {
-                if (instance == null)
-                    instance = new PropertyUtil(fileName);
-            }
+        if (instance.get() == null) {
+            instance.compareAndSet(null, new PropertyUtil(fileName));
         }
-        return instance;
+        return instance.get();
     }
 
     public String getProperty(String key) {
