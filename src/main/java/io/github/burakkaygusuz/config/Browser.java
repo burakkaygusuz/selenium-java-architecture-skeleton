@@ -24,6 +24,7 @@ public enum Browser {
 
             final ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions
+                    .enableBiDi()
                     .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
                     .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
@@ -40,7 +41,9 @@ public enum Browser {
 
             firefoxProfile.setAcceptUntrustedCertificates(true);
             firefoxProfile.setAssumeUntrustedCertificateIssuer(true);
-            firefoxOptions.addPreference("dom.webnotifications.enabled", false)
+            firefoxOptions
+                    .enableBiDi()
+                    .addPreference("dom.webnotifications.enabled", false)
                     .addPreference("gfx.direct2d.disabled", true)
                     .addPreference("layers.acceleration.force-enabled", true)
                     .addPreference("javascript.enabled", true)
@@ -59,7 +62,9 @@ public enum Browser {
             prefs.put("profile.password_manager_enabled", false);
 
             final EdgeOptions edgeOptions = new EdgeOptions();
-            edgeOptions.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
+            edgeOptions
+                    .enableBiDi()
+                    .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
                     .setExperimentalOption("prefs", prefs)
                     .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
                     .setPageLoadStrategy(PageLoadStrategy.NORMAL)
