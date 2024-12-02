@@ -7,33 +7,36 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class CustomConditions {
 
-    /**
-     * An expectation for checking if all selectable options are present.
-     *
-     * @param element the Web element to typing into it.
-     * @return The Web element to a text-typeable.
-     */
-    public static ExpectedCondition<WebElement> elementToBeTypeable(final WebElement element) {
-        return new ExpectedCondition<>() {
-            @Override
-            public WebElement apply(WebDriver driver) {
-                String inputType = element.getAttribute("type");
-                String inputName = element.getAttribute("name");
-                try {
-                    if (inputType.matches("text|mail|password|number") ||
-                            inputName.contains("message")) {
-                        return element;
-                    }
-                    return null;
-                } catch (StaleElementReferenceException e) {
-                    return null;
-                }
-            }
+  private CustomConditions() {
+  }
 
-            @Override
-            public String toString() {
-                return "Element to be text typeable: %s".formatted(element);
-            }
-        };
-    }
+  /**
+   * An expectation for checking if all selectable options are present.
+   *
+   * @param element the Web element to typing into it.
+   * @return The Web element to a text-typeable.
+   */
+  public static ExpectedCondition<WebElement> elementToBeTypeable(final WebElement element) {
+    return new ExpectedCondition<>() {
+      @Override
+      public WebElement apply(WebDriver driver) {
+        String inputType = element.getAttribute("type");
+        String inputName = element.getAttribute("name");
+        try {
+          if (inputType.matches("text|mail|password|number") ||
+              inputName.contains("message")) {
+            return element;
+          }
+          return null;
+        } catch (StaleElementReferenceException e) {
+          return null;
+        }
+      }
+
+      @Override
+      public String toString() {
+        return "Element to be text typeable: %s".formatted(element);
+      }
+    };
+  }
 }
