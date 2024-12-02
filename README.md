@@ -7,10 +7,10 @@ A lean automation architecture built for e2e testing of web applications, develo
 Make sure you have installed and configured the environment variables and all the following prerequisites on your
 development machine:
 
-| OS      | JDK                            | Maven                 | Docker                                        |
-|---------|--------------------------------|-----------------------|-----------------------------------------------|
-| Windows | `scoop install java/openjdk`   | `scoop install maven` | `winget install -e --id Docker.DockerDesktop` |
-| macOS   | `brew install openjdk`         | `brew install maven`  | `brew install docker`                         |
+| OS      | JDK                          | Maven                 | Docker                                        |
+| ------- | ---------------------------- | --------------------- | --------------------------------------------- |
+| Windows | `scoop install java/openjdk` | `scoop install maven` | `winget install -e --id Docker.DockerDesktop` |
+| macOS   | `brew install openjdk`       | `brew install maven`  | `brew install docker`                         |
 
 ## Executing The Tests
 
@@ -29,7 +29,7 @@ cd selenium-java-architecture-skeleton
 - Execute the .yml file to start the Selenium Grid.
 
 ```shell
-docker-compose -f docker-compose.yml up
+DOCKER_DEFAULT_PLATFORM=linux/amd64 docker-compose -f docker-compose.yml up
 ```
 
 - Run the test.
