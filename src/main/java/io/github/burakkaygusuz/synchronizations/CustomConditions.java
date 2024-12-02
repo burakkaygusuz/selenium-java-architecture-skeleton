@@ -20,8 +20,8 @@ public class CustomConditions {
     return new ExpectedCondition<>() {
       @Override
       public WebElement apply(WebDriver driver) {
-        String inputType = element.getAttribute("type");
-        String inputName = element.getAttribute("name");
+        String inputType = element.getDomProperty("type");
+        String inputName = element.getDomProperty("name");
         try {
           if (inputType.matches("text|mail|password|number") ||
               inputName.contains("message")) {

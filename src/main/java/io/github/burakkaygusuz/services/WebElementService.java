@@ -37,8 +37,8 @@ public class WebElementService implements SearchContext {
     return wait.until(webDriver -> CustomConditions.elementToBeTypeable(webElement).apply(webDriver));
   }
 
-  public String findAttribute(By by, String attribute) {
+  public String findDomProperty(By by, String property) {
     WebElement webElement = this.findElement(by);
-    return webElement.getAttribute(attribute);
+    return webElement.getDomProperty(property);
   }
 }
