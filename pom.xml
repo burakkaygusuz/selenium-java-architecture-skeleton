@@ -24,7 +24,7 @@
         <jackson.version>2.18.2</jackson.version>
         <log4j.version>2.24.2</log4j.version>
         <selenium.version>4.28.0</selenium.version>
-        <testng.version>7.10.2</testng.version>
+        <testng.version>7.11.0</testng.version>
         <!--Plugin
         Versions-->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
