@@ -27,7 +27,7 @@
         <testng.version>7.10.2</testng.version>
         <!--Plugin
         Versions-->
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
     </properties>
 
