@@ -23,8 +23,8 @@ public class CustomConditions {
         String inputType = element.getDomProperty("type");
         String inputName = element.getDomProperty("name");
         try {
-          if (inputType.matches("text|mail|password|number") ||
-              inputName.contains("message")) {
+          if ((inputType != null && inputType.matches("text|mail|password|number")) ||
+              (inputName != null && inputName.contains("message"))) {
             return element;
           }
           return null;
