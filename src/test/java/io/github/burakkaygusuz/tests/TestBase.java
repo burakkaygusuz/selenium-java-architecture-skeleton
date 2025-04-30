@@ -37,7 +37,7 @@ public class TestBase {
     driver.manage().window().maximize();
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 
-    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    wait = new WebDriverWait(driver, Duration.ofSeconds(0));
     webElementService = new WebElementService(wait);
   }
 
