@@ -4,7 +4,6 @@ import io.github.burakkaygusuz.config.WebDriverBuilder;
 import io.github.burakkaygusuz.listeners.CustomTestListener;
 import io.github.burakkaygusuz.services.WebElementService;
 import io.github.burakkaygusuz.utils.PropertyUtil;
-
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -34,10 +33,11 @@ public class TestBase {
         .enableHeadless()
         .enableTracing(false)
         .build();
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
     driver.manage().window().maximize();
     driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 
-    wait = new WebDriverWait(driver, Duration.ofSeconds(0));
+    wait = new WebDriverWait(driver, Duration.ofSeconds(30));
     webElementService = new WebElementService(wait);
   }
 
