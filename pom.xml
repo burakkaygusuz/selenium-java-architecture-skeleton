@@ -25,6 +25,7 @@
         <log4j.version>2.24.2</log4j.version>
         <selenium.version>4.30.0</selenium.version>
         <testng.version>7.11.0</testng.version>
+        <checker-qual.version>3.49.2</checker-qual.version>
         <!--Plugin
         Versions-->
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
@@ -87,6 +88,11 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.checkerframework</groupId>
+            <artifactId>checker-qual</artifactId>
+            <version>${checker-qual.version}</version>
         </dependency>
     </dependencies>
 
