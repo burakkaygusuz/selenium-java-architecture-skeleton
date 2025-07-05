@@ -55,11 +55,11 @@ public enum Browser {
   EDGE {
     @Override
     protected EdgeOptions getOptions() {
-      Map<String, Object> prefs = new HashMap<>();
-      prefs.put("profile.default_content_setting_values.notifications", 2);
-      prefs.put("profile.managed_default_content_settings.javascript", 1);
-      prefs.put("credentials_enable_service", false);
-      prefs.put("profile.password_manager_enabled", false);
+      Map<String, Object> prefs = Map.ofEntries(
+          Map.entry("profile.default_content_setting_values.notifications", 2),
+          Map.entry("profile.managed_default_content_settings.javascript", 1),
+          Map.entry("credentials_enable_service", false),
+          Map.entry("profile.password_manager_enabled", false));
 
       final EdgeOptions edgeOptions = new EdgeOptions();
       edgeOptions
