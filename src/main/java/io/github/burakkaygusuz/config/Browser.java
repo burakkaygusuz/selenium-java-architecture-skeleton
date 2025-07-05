@@ -8,7 +8,6 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 public enum Browser {
@@ -16,21 +15,20 @@ public enum Browser {
   CHROME {
     @Override
     protected ChromeOptions getOptions() {
-      Map<String, Object> prefs = Map.ofEntries(
-          Map.entry("profile.default_content_setting_values.notifications", 2),
-          Map.entry("profile.managed_default_content_settings.javascript", 1),
-          Map.entry("credentials_enable_service", false),
-          Map.entry("profile.password_manager_enabled", false));
-
       final ChromeOptions chromeOptions = new ChromeOptions();
-      chromeOptions
-          .enableBiDi()
-          .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
-          .setExperimentalOption("prefs", prefs)
-          .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
-          .setPageLoadStrategy(PageLoadStrategy.NORMAL)
-          .setAcceptInsecureCerts(true);
+      applyCommonOptions(chromeOptions);
+      chromeOptions.setExperimentalOption("prefs", getCommonPrefs());
       return chromeOptions;
+    }
+
+    @Override
+    protected String getHeadlessArgument() {
+      return "headless=new";
+    }
+
+    @Override
+    protected void addHeadlessArgument(AbstractDriverOptions<?> options) {
+      ((ChromeOptions) options).addArguments(getHeadlessArgument());
     }
   },
   FIREFOX {
@@ -51,25 +49,34 @@ public enum Browser {
           .setProfile(firefoxProfile);
       return firefoxOptions;
     }
+
+    @Override
+    protected String getHeadlessArgument() {
+      return "-headless";
+    }
+
+    @Override
+    protected void addHeadlessArgument(AbstractDriverOptions<?> options) {
+      ((FirefoxOptions) options).addArguments(getHeadlessArgument());
+    }
   },
   EDGE {
     @Override
     protected EdgeOptions getOptions() {
-      Map<String, Object> prefs = Map.ofEntries(
-          Map.entry("profile.default_content_setting_values.notifications", 2),
-          Map.entry("profile.managed_default_content_settings.javascript", 1),
-          Map.entry("credentials_enable_service", false),
-          Map.entry("profile.password_manager_enabled", false));
-
       final EdgeOptions edgeOptions = new EdgeOptions();
-      edgeOptions
-          .enableBiDi()
-          .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
-          .setExperimentalOption("prefs", prefs)
-          .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
-          .setPageLoadStrategy(PageLoadStrategy.NORMAL)
-          .setAcceptInsecureCerts(true);
+      applyCommonOptions(edgeOptions);
+      edgeOptions.setExperimentalOption("prefs", getCommonPrefs());
       return edgeOptions;
+    }
+
+    @Override
+    protected String getHeadlessArgument() {
+      return "headless=new";
+    }
+
+    @Override
+    protected void addHeadlessArgument(AbstractDriverOptions<?> options) {
+      ((EdgeOptions) options).addArguments(getHeadlessArgument());
     }
   };
 
@@ -79,4 +86,34 @@ public enum Browser {
   }
 
   protected abstract AbstractDriverOptions<?> getOptions();
+
+  protected abstract String getHeadlessArgument();
+
+  protected abstract void addHeadlessArgument(AbstractDriverOptions<?> options);
+
+  private static Map<String, Object> getCommonPrefs() {
+    return Map.ofEntries(
+        Map.entry("profile.default_content_setting_values.notifications", 2),
+        Map.entry("profile.managed_default_content_settings.javascript", 1),
+        Map.entry("credentials_enable_service", false),
+        Map.entry("profile.password_manager_enabled", false));
+  }
+
+  private static void applyCommonOptions(ChromeOptions options) {
+    options
+        .enableBiDi()
+        .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
+        .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
+        .setPageLoadStrategy(PageLoadStrategy.NORMAL)
+        .setAcceptInsecureCerts(true);
+  }
+
+  private static void applyCommonOptions(EdgeOptions options) {
+    options
+        .enableBiDi()
+        .setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"))
+        .addArguments("--disable-gpu", "--disable-logging", "--disable-dev-shm-usage")
+        .setPageLoadStrategy(PageLoadStrategy.NORMAL)
+        .setAcceptInsecureCerts(true);
+  }
 }

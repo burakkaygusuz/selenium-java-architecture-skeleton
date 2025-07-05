@@ -4,9 +4,7 @@ import io.github.burakkaygusuz.exceptions.UnsupportedBrowserException;
 import io.github.burakkaygusuz.listeners.CustomWebDriverListener;
 import org.apache.logging.log4j.ThreadContext;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.AbstractDriverOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringDecorator;
@@ -41,23 +39,10 @@ public class WebDriverBuilder {
   }
 
   public WebDriverBuilder enableHeadless() {
-    switch (browser) {
-      case "chrome" -> {
-        final ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("headless=new");
-        options.merge(chromeOptions);
-      }
-      case "firefox" -> {
-        final FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.addArguments("-headless");
-        options.merge(firefoxOptions);
-      }
-      case "edge" -> {
-        final EdgeOptions edgeOptions = new EdgeOptions();
-        edgeOptions.addArguments("headless=new");
-        options.merge(edgeOptions);
-      }
-      default -> throw new UnsupportedBrowserException("Browser does not exist: %s".formatted(browser));
+    try {
+      Browser.valueOf(browser.toUpperCase()).addHeadlessArgument(options);
+    } catch (IllegalArgumentException e) {
+      throw new UnsupportedBrowserException("Browser does not exist: %s".formatted(browser));
     }
     return this;
   }
@@ -68,8 +53,8 @@ public class WebDriverBuilder {
           : new RemoteWebDriver(options, isTracingEnabled));
       WebDriver original = DRIVER_THREAD_LOCAL.get();
       return new EventFiringDecorator<>(new CustomWebDriverListener()).decorate(original);
-    } finally {
-      DRIVER_THREAD_LOCAL.remove();
+    } catch (Exception e) {
+      throw new WebDriverException("Failed to build WebDriver", e);
     }
   }
 }
